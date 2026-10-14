@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Payment Timeline — Houston Levee · Nairobi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,300;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #000000; --white: #ffffff;
+  --green: #589a61; --green-dark: #3d7345; --green-bg: #f2f8f3;
+  --gray: #6d6d6d; --gray-light: #e1e1e1; --gray-bg: #f7f7f7;
+  --text: #111111; --border: #e1e1e1;
+  --font: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+}
+html { font-size: 16px; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6;
+       -webkit-font-smoothing: antialiased; }
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+.cover { background: var(--black); color: var(--white); text-align: center; position: relative;
+         overflow: hidden; padding: 3.5rem 2.5rem 3.25rem; margin-bottom: 2.75rem; }
+.cover::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: var(--green); }
+.cover-tag { display: inline-block; background: var(--green); color: var(--white); font-size: .7rem; font-weight: 700;
+             text-transform: uppercase; letter-spacing: 2px; padding: 4px 14px; border-radius: 50px; margin-bottom: 1.4rem; }
+.cover h1 { color: var(--white); font-size: 3rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px;
+            line-height: 1.05; margin-bottom: .9rem; }
+.cover .subtitle { font-size: .8rem; color: rgba(255,255,255,.55); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+
+section { margin-bottom: 3rem; }
+.section-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--green); margin-bottom: .4rem; }
+h2 { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: -.3px; line-height: 1.15; color: var(--black); margin-bottom: .5rem; }
+.lede { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 1.05rem; color: var(--gray); margin-bottom: 1.25rem; }
+
+/* Stat tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .75rem; }
+.tile { border: 1px solid var(--border); border-top: 4px solid var(--black); padding: .85rem 1rem; display: flex; flex-direction: column; }
+.tile span { font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray); }
+.tile strong { font-size: 1.45rem; font-weight: 900; line-height: 1.25; margin-top: .2rem; }
+.tile small { font-size: .76rem; color: var(--gray); margin-top: auto; padding-top: .2rem; }
+
+.callout { background: var(--green-bg); border-left: 5px solid var(--green); padding: 1rem 1.3rem; margin-top: 1.25rem; font-size: .9rem; }
+.callout p + p { margin-top: .45rem; }
+
+/* Chart */
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; font-size: .82rem; margin-top: .5rem; }
+.legend span { display: inline-flex; align-items: center; gap: .45rem; }
+.legend i, .proj i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.legend b { font-weight: 800; }
+.chart { position: relative; margin-top: .75rem; }
+.chart-scroll { overflow-x: auto; }
+.chart svg { display: block; width: 100%; height: auto; font-family: var(--font); }
+.chart-desk svg { min-width: 620px; }
+.chart-mob { display: none; }
+.chart-mob svg { max-width: 480px; }
+.chart .mon.quiet { fill: #a3a3a3; font-weight: 500; }
+.chart .grid { stroke: #ececec; stroke-width: 1; shape-rendering: crispEdges; }
+.chart .base { stroke: #bdbdbd; stroke-width: 1; shape-rendering: crispEdges; }
+.chart .tick { font-size: 11px; fill: var(--gray); font-variant-numeric: tabular-nums; }
+.chart .mon { font-size: 12px; fill: var(--text); font-weight: 600; }
+.chart .yr { font-size: 10px; fill: var(--gray); font-weight: 700; letter-spacing: 1px; }
+.chart .cap { font-size: 12px; font-weight: 800; fill: var(--black); }
+.chart .today line { stroke: #9a9a9a; stroke-width: 1; shape-rendering: crispEdges; }
+.chart .today text { font-size: 9.5px; fill: var(--gray); font-weight: 700; letter-spacing: 1.5px; }
+.chart .ms text { font-size: 11px; fill: var(--text); font-weight: 600; }
+.chart .bar { transition: opacity .12s; }
+.chart svg.dim .col .bar { opacity: .3; }
+.chart svg.dim .col.on .bar { opacity: 1; }
+.chart .hit { fill: transparent; pointer-events: all; outline: none; }
+.chart .hit:focus-visible { stroke: var(--black); stroke-width: 1; }
+.tip { position: absolute; z-index: 2; pointer-events: none; background: var(--white); border: 1px solid rgba(11,11,11,.12);
+       box-shadow: 0 6px 18px rgba(0,0,0,.12); padding: .55rem .75rem; font-size: .8rem; min-width: 190px; }
+.tip[hidden] { display: none; }
+.tip-h { font-size: .64rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray); margin-bottom: .3rem; }
+.tip-r { display: flex; align-items: center; gap: .5rem; line-height: 1.7; }
+.tip-k { width: 12px; height: 2px; flex: none; }
+.tip-r strong { font-weight: 800; font-variant-numeric: tabular-nums; }
+.tip-r span:last-child { color: var(--gray); }
+.tip-t { border-top: 1px solid var(--border); margin-top: .3rem; padding-top: .3rem; }
+
+/* Schedule */
+.table-wrap { overflow-x: auto; }
+.sched { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.sched th { background: var(--black); color: var(--white); padding: .6rem .9rem; text-align: left; font-size: .66rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.sched td { padding: .65rem .9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.sched .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sched td.date { white-space: nowrap; color: var(--gray); font-variant-numeric: tabular-nums; width: 7.5rem; }
+.sched tr.month td { border-top: 2px solid var(--black); border-bottom: 1px solid var(--border); padding-top: 1.1rem; }
+.sched tr.month:first-child td { border-top: none; }
+.sched tr.month .mname { font-weight: 900; text-transform: uppercase; letter-spacing: .5px; }
+.sched tr.month .num { font-weight: 900; }
+.sched .run { display: block; font-size: .7rem; font-weight: 600; color: var(--gray); letter-spacing: .3px; }
+.sched .item b { font-weight: 700; }
+.sched .detail { display: block; font-size: .78rem; color: var(--gray); }
+.sched .note { display: block; font-family: var(--font-serif); font-style: italic; font-size: .86rem; color: var(--green-dark); }
+.proj { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; }
+.proj-inline { display: none; }
+.sched tr.ms td { background: var(--gray-bg); }
+.sched tr.ms .item { font-weight: 700; }
+.sched .msd { font-size: .75rem; margin-right: .45rem; vertical-align: 1px; }
+.sched .run-m { display: none; }
+.sched tr.now td { border-bottom: none; padding: .35rem .9rem; }
+.sched tr.now span { display: flex; align-items: center; gap: .6rem; font-size: .64rem; font-weight: 700; letter-spacing: 1.5px;
+                     text-transform: uppercase; color: var(--green-dark); }
+.sched tr.now span::after { content: ''; flex: 1; border-top: 2px solid var(--green); }
+
+footer { border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 3rem; font-size: .68rem; color: var(--gray);
+         letter-spacing: 1.5px; text-transform: uppercase; text-align: center; font-weight: 600; }
+
+@media print {
+  @page { margin: 12mm; }
+  html { font-size: 12.5px; }
+  .page-wrap { max-width: none; padding: 0; }
+  .cover, .cover-tag, .sched th, .callout, .legend i, .proj i, .sched tr.ms td, .chart svg
+    { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .tip { display: none; }
+  .chart-desk { display: block !important; }
+  .chart-mob { display: none !important; }
+  .chart-desk svg { min-width: 0; }
+  .sched tr, .tile { break-inside: avoid; }
+}
+@media (max-width: 700px) {
+  .chart-desk { display: none; }
+  .chart-mob { display: block; }
+}
+@media (max-width: 640px) {
+  .page-wrap { padding: 0 1rem 3rem; }
+  .tiles { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .tile { padding: .7rem .75rem; }
+  .tile strong { font-size: 1.15rem; }
+  .tile small { font-size: .7rem; line-height: 1.45; }
+  .cover { padding: 2.5rem 1.25rem 2.25rem; }
+  .cover h1 { font-size: 2.1rem; }
+  h2 { font-size: 1.3rem; }
+  .sched th, .sched td { padding: .55rem .5rem; }
+  .sched td.date { width: auto; font-size: .78rem; }
+  .sched .run, .sched .wd { display: none; }
+  .sched .run-m { display: block; font-size: .7rem; font-weight: 600; color: var(--gray); text-transform: none; letter-spacing: .3px; }
+  /* Collapse the Project column instead of removing it, so the month rows' colspans still line up. */
+  .sched .col-proj { padding: 0; width: 0; }
+  .sched .col-proj > * { display: none; }
+  .proj-inline { display: flex; font-size: .76rem; color: var(--gray); margin-top: .15rem; }
+}
+</style>
+</head>
+<body>
+<!-- Generated by build_payment_timeline.py from payment_timeline.json. Edit the JSON and re-run; don't hand-edit this file. -->
+<div class="page-wrap">
+<header class="cover"><div class="cover-tag">The Life Church</div><h1>Payment Timeline</h1><p class="subtitle">Houston Levee · Nairobi</p></header><section><div class="section-label">Overview</div><h2>What gets paid when</h2><p class="lede">Updated 14 Oct 2026. Houston Levee upgrade: February 2027. Nairobi install: the last week of June 2027.</p><div class="tiles"><div class="tile"><span>Combined</span><strong>$1,739,340</strong><small>13 payments, Aug 2026 – Apr 2027</small></div><div class="tile"><span>Houston Levee</span><strong>$1,339,340</strong><small>8 payments · upgrade February 2027</small></div><div class="tile"><span>Nairobi</span><strong>$400,000</strong><small>5 payments · install the last week of June 2027</small></div><div class="tile"><span>Still ahead</span><strong>$1,243,110</strong><small>12 payments after today</small></div></div><div class="callout"><p><strong>4 Jan 2027 is the big day:</strong> $831,230 across 7 payments, 48% of the combined total.</p><p><strong>Could move:</strong> Vario Hoist (rigging), $70,000: or 19 Nov 2026 for SOC. Steel Labor, $100,000: or billed after the January 2027 install.</p></div></section><section><div class="section-label">By month</div><h2>Payments by month</h2><div class="legend"><span><i style="background:#2366ad"></i>Houston Levee <b>$1,339,340</b></span><span><i style="background:#589a61"></i>Nairobi <b>$400,000</b></span></div><div class="chart"><div class="chart-scroll chart-desk"><svg viewBox="0 0 760 330" role="group" aria-label="Payments by month, stacked by project"><line class="base" x1="64" x2="742" y1="230.0" y2="230.0"/><text class="tick" x="54" y="234.0" text-anchor="end">$0</text><line class="grid" x1="64" x2="742" y1="181.0" y2="181.0"/><text class="tick" x="54" y="185.0" text-anchor="end">$250K</text><line class="grid" x1="64" x2="742" y1="132.0" y2="132.0"/><text class="tick" x="54" y="136.0" text-anchor="end">$500K</text><line class="grid" x1="64" x2="742" y1="83.0" y2="83.0"/><text class="tick" x="54" y="87.0" text-anchor="end">$750K</text><line class="grid" x1="64" x2="742" y1="34.0" y2="34.0"/><text class="tick" x="54" y="38.0" text-anchor="end">$1M</text><g class="today"><line x1="214.1" x2="214.1" y1="26" y2="230"/><text x="214.1" y="20" text-anchor="middle">TODAY</text></g><text class="mon" x="94.8" y="250" text-anchor="middle">Aug</text><text class="yr" x="94.8" y="265" text-anchor="middle">2026</text><g class="col"><path class="bar" d="M82.8,230.0V136.7Q82.8,132.7 86.8,132.7H102.8Q106.8,132.7 106.8,136.7V230.0Z" fill="#2366ad"/><text class="cap" x="94.8" y="124.7" text-anchor="middle">$496K</text><rect class="hit" x="64.0" y="14" width="61.6" height="216" tabindex="0" aria-label="August 2026: Houston Levee $496,230; month total $496,230" data-month="August 2026" data-total="$496,230" data-rows="[[&quot;Houston Levee&quot;, &quot;$496,230&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon" x="156.5" y="250" text-anchor="middle">Sep</text><text class="mon" x="218.1" y="250" text-anchor="middle">Oct</text><text class="mon" x="279.7" y="250" text-anchor="middle">Nov</text><g class="col"><path class="bar" d="M267.7,230.0V227.8Q267.7,223.8 271.7,223.8H287.7Q291.7,223.8 291.7,227.8V230.0Z" fill="#2366ad"/><text class="cap" x="279.7" y="215.8" text-anchor="middle">$32K</text><rect class="hit" x="248.9" y="14" width="61.6" height="216" tabindex="0" aria-label="November 2026: Houston Levee $31,880; month total $31,880" data-month="November 2026" data-total="$31,880" data-rows="[[&quot;Houston Levee&quot;, &quot;$31,880&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon" x="341.4" y="250" text-anchor="middle">Dec</text><text class="mon" x="403.0" y="250" text-anchor="middle">Jan</text><text class="yr" x="403.0" y="265" text-anchor="middle">2027</text><g class="col"><path class="bar" d="M391.0,230.0V75.9H415.0V230.0Z" fill="#2366ad"/><path class="bar" d="M391.0,73.9V39.7Q391.0,35.7 395.0,35.7H411.0Q415.0,35.7 415.0,39.7V73.9Z" fill="#589a61"/><text class="cap" x="403.0" y="27.7" text-anchor="middle">$991K</text><rect class="hit" x="372.2" y="14" width="61.6" height="216" tabindex="0" aria-label="January 2027: Houston Levee $791,230, Nairobi $200,000; month total $991,230" data-month="January 2027" data-total="$991,230" data-rows="[[&quot;Houston Levee&quot;, &quot;$791,230&quot;, &quot;#2366ad&quot;], [&quot;Nairobi&quot;, &quot;$200,000&quot;, &quot;#589a61&quot;]]"/></g><text class="mon" x="464.6" y="250" text-anchor="middle">Feb</text><g class="col"><path class="bar" d="M452.6,230.0V230.0Q452.6,226.1 456.6,226.1H472.7Q476.6,226.1 476.6,230.0V230.0Z" fill="#2366ad"/><text class="cap" x="464.6" y="218.1" text-anchor="middle">$20K</text><rect class="hit" x="433.8" y="14" width="61.6" height="216" tabindex="0" aria-label="February 2027: Houston Levee $20,000; month total $20,000" data-month="February 2027" data-total="$20,000" data-rows="[[&quot;Houston Levee&quot;, &quot;$20,000&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon" x="526.3" y="250" text-anchor="middle">Mar</text><text class="mon" x="587.9" y="250" text-anchor="middle">Apr</text><g class="col"><path class="bar" d="M575.9,230.0V194.8Q575.9,190.8 579.9,190.8H595.9Q599.9,190.8 599.9,194.8V230.0Z" fill="#589a61"/><text class="cap" x="587.9" y="182.8" text-anchor="middle">$200K</text><rect class="hit" x="557.1" y="14" width="61.6" height="216" tabindex="0" aria-label="April 2027: Nairobi $200,000; month total $200,000" data-month="April 2027" data-total="$200,000" data-rows="[[&quot;Nairobi&quot;, &quot;$200,000&quot;, &quot;#589a61&quot;]]"/></g><text class="mon" x="649.5" y="250" text-anchor="middle">May</text><text class="mon" x="711.2" y="250" text-anchor="middle">Jun</text><g class="ms"><rect x="461.1" y="278.5" width="7" height="7" fill="#2366ad" transform="rotate(45 464.6 282.0)"/><text x="464.6" y="305.0" text-anchor="middle">Houston Levee upgrade</text></g><g class="ms"><rect x="729.3" y="278.5" width="7" height="7" fill="#589a61" transform="rotate(45 732.8 282.0)"/><text x="742.0" y="305.0" text-anchor="end">Nairobi install</text></g></svg></div><div class="chart-mob"><svg viewBox="0 0 360 338" role="group" aria-label="Payments by month, stacked by project"><line class="base" x1="74" x2="74" y1="4" y2="334"/><text class="mon" x="0" y="23.0">Aug 2026</text><g class="col"><path class="bar" d="M74.0,12.0H175.1Q179.1,12.0 179.1,16.0V22.0Q179.1,26.0 175.1,26.0H74.0Z" fill="#2366ad"/><text class="cap" x="185.1" y="23.0">$496K</text><rect class="hit" x="0" y="4" width="360" height="30" tabindex="0" aria-label="August 2026: Houston Levee $496,230; month total $496,230" data-month="August 2026" data-total="$496,230" data-rows="[[&quot;Houston Levee&quot;, &quot;$496,230&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon quiet" x="0" y="53.0">Sep 2026</text><text class="mon quiet" x="0" y="83.0">Oct 2026</text><g class="today"><text x="84.0" y="82.5">TODAY · 14 OCT</text></g><text class="mon" x="0" y="113.0">Nov 2026</text><g class="col"><path class="bar" d="M74.0,102.0H76.8Q80.8,102.0 80.8,106.0V112.0Q80.8,116.0 76.8,116.0H74.0Z" fill="#2366ad"/><text class="cap" x="86.8" y="113.0">$32K</text><rect class="hit" x="0" y="94" width="360" height="30" tabindex="0" aria-label="November 2026: Houston Levee $31,880; month total $31,880" data-month="November 2026" data-total="$31,880" data-rows="[[&quot;Houston Levee&quot;, &quot;$31,880&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon quiet" x="0" y="143.0">Dec 2026</text><text class="mon" x="0" y="173.0">Jan 2027</text><g class="col"><path class="bar" d="M74.0,162.0H240.6V176.0H74.0Z" fill="#2366ad"/><path class="bar" d="M242.6,162.0H280.0Q284.0,162.0 284.0,166.0V172.0Q284.0,176.0 280.0,176.0H242.6Z" fill="#589a61"/><text class="cap" x="290.0" y="173.0">$991K</text><rect class="hit" x="0" y="154" width="360" height="30" tabindex="0" aria-label="January 2027: Houston Levee $791,230, Nairobi $200,000; month total $991,230" data-month="January 2027" data-total="$991,230" data-rows="[[&quot;Houston Levee&quot;, &quot;$791,230&quot;, &quot;#2366ad&quot;], [&quot;Nairobi&quot;, &quot;$200,000&quot;, &quot;#589a61&quot;]]"/></g><text class="mon" x="0" y="203.0">Feb 2027</text><g class="col"><path class="bar" d="M74.0,192.0H74.2Q78.2,192.0 78.2,196.0V202.0Q78.2,206.0 74.2,206.0H74.0Z" fill="#2366ad"/><text class="cap" x="84.2" y="203.0">$20K</text><g class="ms"><rect x="127.1" y="195.5" width="7" height="7" fill="#2366ad" transform="rotate(45 130.6 199.0)"/><text x="139.6" y="203.0">Houston Levee upgrade</text></g><rect class="hit" x="0" y="184" width="360" height="30" tabindex="0" aria-label="February 2027: Houston Levee $20,000; month total $20,000" data-month="February 2027" data-total="$20,000" data-rows="[[&quot;Houston Levee&quot;, &quot;$20,000&quot;, &quot;#2366ad&quot;]]"/></g><text class="mon quiet" x="0" y="233.0">Mar 2027</text><text class="mon" x="0" y="263.0">Apr 2027</text><g class="col"><path class="bar" d="M74.0,252.0H112.4Q116.4,252.0 116.4,256.0V262.0Q116.4,266.0 112.4,266.0H74.0Z" fill="#589a61"/><text class="cap" x="122.4" y="263.0">$200K</text><rect class="hit" x="0" y="244" width="360" height="30" tabindex="0" aria-label="April 2027: Nairobi $200,000; month total $200,000" data-month="April 2027" data-total="$200,000" data-rows="[[&quot;Nairobi&quot;, &quot;$200,000&quot;, &quot;#589a61&quot;]]"/></g><text class="mon quiet" x="0" y="293.0">May 2027</text><text class="mon quiet" x="0" y="323.0">Jun 2027</text><g class="ms"><rect x="84.5" y="315.5" width="7" height="7" fill="#589a61" transform="rotate(45 88.0 319.0)"/><text x="97.0" y="323.0">Nairobi install</text></g></svg></div><div class="tip" hidden></div></div></section><section><div class="section-label">Schedule</div><h2>Every payment, in order</h2><div class="table-wrap"><table class="sched"><thead><tr><th>Date</th><th class="col-proj"><span>Project</span></th><th>Item</th><th class="num">Amount</th></tr></thead><tbody><tr class="month"><td colspan="3" class="mname">August 2026<span class="run-m">Running total $496,230</span></td><td class="num">$496,230<span class="run">Running total $496,230</span></td></tr><tr><td class="date"><span class="wd">Fri </span>14 Aug</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>ROE LED System (deposit)</b><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$496,230</td></tr><tr class="now"><td colspan="4"><span>Today · 14 Oct 2026</span></td></tr><tr class="month"><td colspan="3" class="mname">November 2026<span class="run-m">Running total $528,110</span></td><td class="num">$31,880<span class="run">Running total $528,110</span></td></tr><tr><td class="date"><span class="wd">Mon </span>30 Nov</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>Vello Storm 4000</b><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$31,880</td></tr><tr class="month"><td colspan="3" class="mname">January 2027<span class="run-m">Running total $1,519,340</span></td><td class="num">$991,230<span class="run">Running total $1,519,340</span></td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>ROE LED System (remaining)</b><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$496,230</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>RED Komodo X</b><span class="detail">10 × $11,000</span><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$110,000</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>Lenses</b><span class="detail">5 × $3,000</span><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$15,000</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>Vario Hoist (rigging)</b><span class="detail">4 × $17,500</span><span class="note">Or 19 Nov 2026 for SOC</span><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$70,000</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>Steel Labor</b><span class="note">Or billed after the January 2027 install</span><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$100,000</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><b>Video Streaming Equipment</b><span class="proj proj-inline"><i style="background:#589a61"></i>Nairobi</span></td><td class="num">$17,000</td></tr><tr><td class="date"><span class="wd">Mon </span>4 Jan</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><b>Creative Equipment</b><span class="proj proj-inline"><i style="background:#589a61"></i>Nairobi</span></td><td class="num">$23,000</td></tr><tr><td class="date"><span class="wd">Mon </span>18 Jan</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><b>Main PA System (deposit)</b><span class="proj proj-inline"><i style="background:#589a61"></i>Nairobi</span></td><td class="num">$160,000</td></tr><tr class="month"><td colspan="3" class="mname">February 2027<span class="run-m">Running total $1,539,340</span></td><td class="num">$20,000<span class="run">Running total $1,539,340</span></td></tr><tr class="ms"><td class="date">February</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><span class="msd" style="color:#2366ad">◆</span>Houston Levee upgrade</td><td></td></tr><tr><td class="date"><span class="wd">Mon </span>22 Feb</td><td class="col-proj"><span class="proj"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="item"><b>Rigging Labor</b><span class="note">Billed after install</span><span class="proj proj-inline"><i style="background:#2366ad"></i>Houston Levee</span></td><td class="num">$20,000</td></tr><tr class="month"><td colspan="3" class="mname">April 2027<span class="run-m">Running total $1,739,340</span></td><td class="num">$200,000<span class="run">Running total $1,739,340</span></td></tr><tr><td class="date"><span class="wd">Thu </span>1 Apr</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><b>Lighting Package</b><span class="proj proj-inline"><i style="background:#589a61"></i>Nairobi</span></td><td class="num">$40,000</td></tr><tr><td class="date"><span class="wd">Thu </span>15 Apr</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><b>Main PA System (remaining)</b><span class="proj proj-inline"><i style="background:#589a61"></i>Nairobi</span></td><td class="num">$160,000</td></tr><tr class="month"><td colspan="3" class="mname">June 2027</td><td class="num"></td></tr><tr class="ms"><td class="date">Last week</td><td class="col-proj"><span class="proj"><i style="background:#589a61"></i>Nairobi</span></td><td class="item"><span class="msd" style="color:#589a61">◆</span>Nairobi install</td><td></td></tr></tbody></table></div></section><footer>The Life Church · Payment Timeline · Updated 14 Oct 2026</footer>
+</div>
+<script>
+(() => {
+  const chart = document.querySelector('.chart');
+  if (!chart) return;
+  const tip = chart.querySelector('.tip');
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const hide = () => {
+    tip.hidden = true;
+    chart.querySelectorAll('svg.dim').forEach(s => s.classList.remove('dim'));
+    chart.querySelectorAll('.col.on').forEach(c => c.classList.remove('on'));
+  };
+  const show = (hit, x, y) => {
+    hide();
+    hit.closest('.col').classList.add('on');
+    hit.closest('svg').classList.add('dim');
+    tip.replaceChildren(el('div', 'tip-h', hit.dataset.month));
+    for (const [name, value, color] of JSON.parse(hit.dataset.rows)) {
+      const k = el('span', 'tip-k'); k.style.background = color;
+      const row = el('div', 'tip-r'); row.append(k, el('strong', null, value), el('span', null, name)); tip.append(row);
+    }
+    const t = el('div', 'tip-r tip-t'); t.append(el('span', 'tip-k'), el('strong', null, hit.dataset.total), el('span', null, 'Month total'));
+    tip.append(t);
+    tip.hidden = false;
+    const box = chart.getBoundingClientRect(), w = tip.offsetWidth;
+    let left = x - box.left + 14;
+    if (left + w > box.width) left = x - box.left - w - 14;
+    tip.style.left = Math.max(0, Math.min(left, box.width - w)) + 'px';
+    tip.style.top = Math.max(0, y - box.top + 14) + 'px';
+  };
+  // Mouse: follow the pointer. Touch: tap a month to show it, tap anywhere else to close.
+  chart.querySelectorAll('.hit').forEach(hit => {
+    hit.addEventListener('pointermove', e => { if (e.pointerType !== 'touch') show(hit, e.clientX, e.clientY); });
+    hit.addEventListener('pointerleave', e => { if (e.pointerType !== 'touch') hide(); });
+    hit.addEventListener('click', e => { e.stopPropagation(); show(hit, e.clientX, e.clientY); });
+    hit.addEventListener('focus', () => { const r = hit.getBoundingClientRect(); show(hit, r.left + r.width / 2, r.top + r.height / 2); });
+    hit.addEventListener('blur', hide);
+  });
+  document.addEventListener('click', hide);
+})();
+</script>
+</body>
+</html>
